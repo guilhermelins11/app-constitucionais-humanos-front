@@ -8,7 +8,7 @@
 
 ## Como usar
 
-1. Abra o arquivo `index.html` em qualquer navegador
+1. Abra o arquivo `index-mvp.html` em qualquer navegador
 2. Os arquivos CSS e JS são carregados automaticamente
 
 ## Estrutura
