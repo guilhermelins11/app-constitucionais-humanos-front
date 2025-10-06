@@ -2,7 +2,7 @@
 
 ## Arquivos
 
-- **index.html** - Arquivo HTML principal
+- **index-mvp.html** - Arquivo HTML principal
 - **styles.css** - Estilos CSS
 - **script.js** - Funcionalidades JavaScript
 
@@ -13,7 +13,7 @@
 
 ## Estrutura
 
-### HTML (index.html)
+### HTML (index-mvp.html)
 - Header com status de login e botão de logout
 - Seção de boas-vindas
 - Carousel de destaques
