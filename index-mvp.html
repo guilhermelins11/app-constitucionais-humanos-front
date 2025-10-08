@@ -3,106 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juscidadão</title>
-    <meta name="description" content="Acesse e explore seus direitos do consumidor e outros direitos legais em um só lugar">
-    <link rel="stylesheet" href="./public/styles.css">
+    <title>JusCidadão - Democratizando as leis</title>
+    <meta name="description" content="Democratizando as leis que foram feitas para você. Acesse e entenda seus direitos de forma simples e clara.">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <section class="welcome-section">
+    <!-- Hero Section with Auth Card -->
+    <section class="hero-section">
+        <!-- Decorative circles -->
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+        <div class="circle-yellow"></div>
+        
         <div class="container">
-            <div class="welcome-content">
-                <div>
-                    <h1 class="welcome-title">Bem vindo, Antony!</h1>
-                    <p class="welcome-subtitle">introdução maneira</p>
+            <!-- Menu Hamburger -->
+            <button class="menu-btn" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="logo">
+                        <span class="logo-light">Jus</span><span class="logo-bold">Cidadão</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Democratizando <em>as leis</em> que foram feitas para <em>você</em>
+                    </p>
                 </div>
-            <button class="logout-btn" onclick="handleLogout()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg></button>
+
+                <!-- Auth Card -->
+                <div class="auth-card" id="authCard">
+                    <!-- Not Logged In State -->
+                    <div class="auth-content auth-logged-out" id="loggedOutState">
+                        <h3 class="auth-title">Ops! Parece que você não esta em nenhuma conta</h3>
+                        <button class="btn btn-outline" onclick="handleSignup()">Criar conta</button>
+                        <button class="btn btn-outline" onclick="handleLogin()">Entrar</button>
+                    </div>
+
+                    <!-- Logged In State -->
+                    <div class="auth-content auth-logged-in hidden" id="loggedInState">
+                        <div class="user-avatar">
+                            <div class="avatar-circle">F</div>
+                        </div>
+                        <h3 class="user-name">Fulano Silvestre</h3>
+                        <span class="user-badge">Nível Prata</span>
+                        <button class="btn btn-outline" onclick="handleLogout()">Logout</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    <section class="carousel-section">
-        <div class="container">
-            <div class="carousel">
-                <div class="carousel-track" id="carouselTrack">
-                    <div class="carousel-slide"><div class="carousel-placeholder"></div></div>
-                    <div class="carousel-slide"><div class="carousel-placeholder"></div></div>
-                    <div class="carousel-slide"><div class="carousel-placeholder"></div></div>
-                </div>
-                <button class="carousel-btn prev" onclick="prevSlide()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-                <button class="carousel-btn next" onclick="nextSlide()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
-                <div class="carousel-indicators">
-                    <span class="indicator active" onclick="goToSlide(0)"></span>
-                    <span class="indicator" onclick="goToSlide(1)"></span>
-                    <span class="indicator" onclick="goToSlide(2)"></span>
-                </div>
-            </div>
-        </div>
-    </section>
+
+    <!-- Search Section -->
     <section class="search-section">
         <div class="container">
             <div class="search-bar">
                 <div class="search-input-wrapper">
-                    <input type="text" id="searchInput" placeholder="Pesquise os direitos" class="search-input">
-                    <button class="search-btn" onclick="handleSearch()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg></button>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Pesquise os direitos" 
+                        class="search-input"
+                        onkeypress="handleSearchKeypress(event)"
+                    >
+                    <button class="search-btn" onclick="handleSearch()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
                 </div>
-                <button class="btn-outline" onclick="handleFilters()">Filtros</button>
+                <button class="btn btn-filters" onclick="handleFilters()">Filtros</button>
             </div>
         </div>
     </section>
+
+    <!-- Explore Section -->
     <section class="explore-section">
         <div class="container">
             <h2 class="section-title">Explore</h2>
-            <div class="explore-grid">
-                <div class="explore-card" onclick="handleCardClick('Direitos do consumidor')">
-                    <h3 class="card-title">Direitos do consumidor</h3>
-                    <p class="card-subtitle">Lei 8078/14</p>
-                    <p class="card-description">Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus ex sapien vitae pellentesque sem placerat in id cursus mi pretium tellus duis convallis tempus leo eu aenean sed diam urna tempor.</p>
-                </div>
-                <div class="explore-card" onclick="handleCardClick('Direitos relacionados a restaurantes')">
-                    <h3 class="card-title">Direitos relacionados a restaurantes+</h3>
-                    <p class="card-subtitle">Lei 192/394</p>
-                    <p class="card-description">Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus ex sapien vitae pellentesque sem placerat in id cursus mi pretium tellus duis convallis tempus leo eu aenean sed diam urna tempor.</p>
-                </div>
-                <div class="explore-card" onclick="handleCardClick('Outro direito')">
-                    <h3 class="card-title">Direitos relacionados a trabalhadores+</h3>
-                    <p class="card-subtitle">Lei 197/314</p>
-                    <p class="card-description">Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus ex sapien vitae pellentesque sem placerat in id cursus mi pretium tellus duis convallis tempus leo eu aenean sed diam urna tempor.</p>
-                </div>
-                <div class="explore-card" onclick="handleCardClick('Mais um direito')">
-                    <h3 class="card-title">Direitos relacionados a gestantes, idosos e deficientes+</h3>
-                    <p class="card-subtitle">Lei 102/399</p>
-                    <p class="card-description">Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus ex sapien vitae pellentesque sem placerat in id cursus mi pretium tellus duis convallis tempus leo eu aenean sed diam urna tempor.</p>
-                </div>
+            <div class="explore-list" id="exploreList">
+                <!-- Cards will be generated by JavaScript -->
             </div>
         </div>
     </section>
-    <section class="related-section">
-        <div class="container">
-            <h2 class="section-title">Relacionados</h2>
-            <div class="related-grid">
-                <div class="related-card">
-                    <div class="related-image">•</div>
-                    <div class="related-content">
-                        <p class="related-category">Direito Trabalhista</p>
-                        <h3 class="related-title">Lista do vid</h3>
-                    </div>
-                </div>
-                <div class="related-card">
-                    <div class="related-image">•1</div>
-                    <div class="related-content">
-                        <p class="related-category">Educação</p>
-                        <h3 class="related-title">•1</h3>
-                    </div>
-                </div>
-                <div class="related-card">
-                    <div class="related-image">•1</div>
-                    <div class="related-content">
-                        <p class="related-category">Saude</p>
-                        <h3 class="related-title">•1</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <script src="./public/script.js"></script>
+
+    <!-- Toast Notification -->
+    <div class="toast hidden" id="toast">
+        <span class="toast-message" id="toastMessage"></span>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
