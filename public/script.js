@@ -1,7 +1,5 @@
-// State
 let isLoggedIn = false;
 
-// Law cards data
 const lawCards = [
     {
         id: 1,
@@ -54,13 +52,12 @@ const relatedCards = [
     }
 ];
 
-// Initialize
 document.addEventListener('DOMContentLoaded', function() {
     renderExploreCards();
-    renderRelatedCards(); // CHAMADA DE FUNÇÃO NOVA
+    renderRelatedCards();
     updateAuthState();
 });
-// Render explore cards
+
 function renderExploreCards() {
     const exploreList = document.getElementById('exploreList');
     exploreList.innerHTML = '';
@@ -83,7 +80,6 @@ function renderExploreCards() {
     });
 }
 
-// Render related cards (NOVA FUNÇÃO)
 function renderRelatedCards() {
     const relatedList = document.getElementById('relatedList');
     relatedList.innerHTML = '';
@@ -107,7 +103,7 @@ function renderRelatedCards() {
     });
 }
 
-// Update auth state
+
 function updateAuthState() {
     const loggedOutState = document.getElementById('loggedOutState');
     const loggedInState = document.getElementById('loggedInState');
@@ -121,7 +117,6 @@ function updateAuthState() {
     }
 }
 
-// Auth handlers
 function handleSignup() {
     showToast('Abrindo tela de cadastro...');
 }
@@ -144,12 +139,10 @@ function handleLogout() {
     }, 1000);
 }
 
-// Menu toggle
 function toggleMenu() {
     showToast('Menu em desenvolvimento...');
 }
 
-// Search handlers
 function handleSearch() {
     const searchInput = document.getElementById('searchInput');
     const query = searchInput.value.trim();
@@ -171,17 +164,14 @@ function handleFilters() {
     showToast('Abrindo filtros...');
 }
 
-// Card click handler
 function handleCardClick(title) {
     showToast(`Você clicou em: ${title}`);
 }
 
-// Toast notification
 function showToast(message) {
     const toast = document.getElementById('toast');
     const toastMessage = document.getElementById('toastMessage');
     
-    // Remove existing toast if any
     toast.classList.remove('hidden');
     toastMessage.textContent = message;
     
