@@ -2,18 +2,18 @@
 
 ## Arquivos
 
-- **index.html** - Arquivo HTML principal
+- **index-mvp.html** - Arquivo HTML principal
 - **styles.css** - Estilos CSS
 - **script.js** - Funcionalidades JavaScript
 
 ## Como usar
 
-1. Abra o arquivo `index.html` em qualquer navegador
+1. Abra o arquivo `index-mvp.html` em qualquer navegador
 2. Os arquivos CSS e JS são carregados automaticamente
 
 ## Estrutura
 
-### HTML (index.html)
+### HTML (index-mvp.html)
 - Header com status de login e botão de logout
 - Seção de boas-vindas
 - Carousel de destaques
