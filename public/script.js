@@ -33,12 +33,33 @@ const lawCards = [
     }
 ];
 
+const relatedCards = [
+    {
+        id: 1,
+        title: "Direito Trabalhista",
+        subtitle: "Lista do vid",
+        count: 1
+    },
+    {
+        id: 2,
+        title: "Educação",
+        subtitle: "•1",
+        count: 1
+    },
+    {
+        id: 3,
+        title: "Saúde",
+        subtitle: "•1",
+        count: 1
+    }
+];
+
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
     renderExploreCards();
+    renderRelatedCards(); // CHAMADA DE FUNÇÃO NOVA
     updateAuthState();
 });
-
 // Render explore cards
 function renderExploreCards() {
     const exploreList = document.getElementById('exploreList');
@@ -59,6 +80,30 @@ function renderExploreCards() {
         `;
         
         exploreList.appendChild(cardElement);
+    });
+}
+
+// Render related cards (NOVA FUNÇÃO)
+function renderRelatedCards() {
+    const relatedList = document.getElementById('relatedList');
+    relatedList.innerHTML = '';
+    
+    relatedCards.forEach(card => {
+        const cardElement = document.createElement('div');
+        cardElement.className = 'related-card';
+        cardElement.onclick = () => showToast(`Você clicou em: ${card.title}`);
+        
+        cardElement.innerHTML = `
+            <div class="related-thumbnail">
+                <span class="related-count-top">${card.subtitle}</span>
+            </div>
+            <div class="related-content">
+                <h3 class="related-title">${card.title}</h3>
+                <span class="related-subtitle">${card.subtitle}</span>
+            </div>
+        `;
+        
+        relatedList.appendChild(cardElement);
     });
 }
 

@@ -376,6 +376,98 @@ body {
     line-height: 1.5;
 }
 
+/* Related Section (NOVO ESTILO) */
+.related-section {
+    background-color: #f8f9fb;
+    padding: 2rem 0;
+}
+
+.related-list {
+    display: flex;
+    /* Permite que os cards fiquem lado a lado */
+    gap: 1.5rem; 
+    /* Adiciona rolagem horizontal para dispositivos menores */
+    overflow-x: auto;
+    padding-bottom: 1rem; /* Espaço para a barra de rolagem */
+    /* Remove barra de rolagem em alguns navegadores, mas não é obrigatório */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+/* Esconder barra de rolagem no Chrome, Safari, Opera */
+.related-list::-webkit-scrollbar {
+    display: none;
+}
+
+.related-card {
+    /* Define largura e altura como na imagem */
+    flex: 0 0 300px; /* Largura fixa para cada card */
+    min-width: 280px; /* Evita que o card encolha muito */
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.related-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.related-thumbnail {
+    /* Estilo do bloco cinza claro, com altura fixa */
+    width: 100%;
+    height: 120px; 
+    background-color: #f1f5f9; 
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.related-count-top {
+    /* Estilo do pontinho e do número que você tinha na imagem */
+    color: #64748b; 
+    font-size: 1.5rem;
+}
+
+.related-content {
+    padding: 0 0.25rem;
+}
+
+.related-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #64748b; /* Cor mais clara para o título principal */
+    margin-bottom: 0.25rem;
+}
+
+.related-subtitle {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1e293b; /* Cor mais escura para o subtítulo/foco */
+    display: block;
+}
+
+/* Ajuste Responsivo para a lista de relacionados (em telas pequenas) */
+@media (max-width: 768px) {
+    .related-list {
+        /* Permite o scroll horizontal em mobile */
+        flex-wrap: nowrap;
+    }
+    
+    .related-card {
+        /* Mantém o card com uma largura razoável para o scroll */
+        flex: 0 0 75%; 
+        min-width: 250px;
+    }
+}
+
 /* Toast Notification */
 .toast {
     position: fixed;
