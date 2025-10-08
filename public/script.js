@@ -175,7 +175,7 @@ function showToast(message) {
     toast.classList.remove('hidden');
     toastMessage.textContent = message;
     
-    // Auto hide after 3 seconds
+    // Será ocultado apos 3 segundos
     setTimeout(() => {
         toast.classList.add('hidden');
     }, 3000);
