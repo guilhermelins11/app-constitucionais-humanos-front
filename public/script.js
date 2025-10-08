@@ -1,105 +1,147 @@
-let currentSlide = 0;
-const totalSlides = 3;
+// State
+let isLoggedIn = false;
 
-function updateCarousel() {
-    const track = document.getElementById('carouselTrack');
-    const indicators = document.querySelectorAll('.indicator');
+// Law cards data
+const lawCards = [
+    {
+        id: 1,
+        title: "Direitos do consumidor",
+        law: "Lei 93994.34",
+        description: "cosnsi idanei iokaojmi italoroeammmm",
+        thumbnail: "📚"
+    },
+    {
+        id: 2,
+        title: "Direitos relacionados a restaurantes--",
+        law: "Lei 30r2394",
+        description: "affa",
+        thumbnail: "⚖️"
+    },
+    {
+        id: 3,
+        title: "fa",
+        law: "fd",
+        description: "Subsfdequent amendments include important updates...",
+        thumbnail: "✍️"
+    },
+    {
+        id: 4,
+        title: "fa",
+        law: "fd",
+        description: "Subsfdequent amendments include important updates...",
+        thumbnail: "⚖️"
+    }
+];
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    renderExploreCards();
+    updateAuthState();
+});
+
+// Render explore cards
+function renderExploreCards() {
+    const exploreList = document.getElementById('exploreList');
+    exploreList.innerHTML = '';
     
-    track.style.transform = `translateX(-${currentSlide * 100}%)`;
-    
-    indicators.forEach((indicator, index) => {
-        if (index === currentSlide) {
-            indicator.classList.add('active');
-        } else {
-            indicator.classList.remove('active');
-        }
+    lawCards.forEach(card => {
+        const cardElement = document.createElement('div');
+        cardElement.className = 'explore-card';
+        cardElement.onclick = () => handleCardClick(card.title);
+        
+        cardElement.innerHTML = `
+            <div class="card-thumbnail">${card.thumbnail}</div>
+            <div class="card-content">
+                <h3 class="card-title">${card.title}</h3>
+                <span class="card-law">${card.law}</span>
+                <p class="card-description">${card.description}</p>
+            </div>
+        `;
+        
+        exploreList.appendChild(cardElement);
     });
 }
 
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    updateCarousel();
-}
-
-function prevSlide() {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-    updateCarousel();
-}
-
-function goToSlide(index) {
-    currentSlide = index;
-    updateCarousel();
-}
-
-// Search functionality
-function handleSearch() {
-    const searchInput = document.getElementById('searchInput');
-    const query = searchInput.value;
+// Update auth state
+function updateAuthState() {
+    const loggedOutState = document.getElementById('loggedOutState');
+    const loggedInState = document.getElementById('loggedInState');
     
-    if (query.trim()) {
-        showToast(`Pesquisando por: ${query}`, 'info');
+    if (isLoggedIn) {
+        loggedOutState.classList.add('hidden');
+        loggedInState.classList.remove('hidden');
     } else {
-        showToast('Digite algo para pesquisar', 'info');
+        loggedOutState.classList.remove('hidden');
+        loggedInState.classList.add('hidden');
     }
 }
 
-// Allow search on Enter key
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) {
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                handleSearch();
-            }
-        });
-    }
-});
-
-// Filters functionality
-function handleFilters() {
-    showToast('Abrindo filtros...', 'info');
+// Auth handlers
+function handleSignup() {
+    showToast('Abrindo tela de cadastro...');
 }
 
-// Logout functionality
-function handleLogout() {
-    showToast('Saindo...', 'success');
+function handleLogin() {
+    showToast('Entrando...');
     setTimeout(() => {
-        // Aqui você pode redirecionar para a página de login
-        console.log('Logout realizado');
+        isLoggedIn = true;
+        updateAuthState();
+        showToast('Login realizado com sucesso!');
     }, 1000);
 }
 
-// Card click functionality
-function handleCardClick(title) {
-    showToast(`Você clicou em: ${title}`, 'info');
+function handleLogout() {
+    showToast('Saindo...');
+    setTimeout(() => {
+        isLoggedIn = false;
+        updateAuthState();
+        showToast('Logout realizado com sucesso!');
+    }, 1000);
 }
 
-// Toast notification system
-function showToast(message, type = 'info') {
-    // Remove existing toast if any
-    const existingToast = document.querySelector('.toast');
-    if (existingToast) {
-        existingToast.remove();
+// Menu toggle
+function toggleMenu() {
+    showToast('Menu em desenvolvimento...');
+}
+
+// Search handlers
+function handleSearch() {
+    const searchInput = document.getElementById('searchInput');
+    const query = searchInput.value.trim();
+    
+    if (query) {
+        showToast(`Pesquisando por: ${query}`);
+    } else {
+        showToast('Digite algo para pesquisar');
     }
+}
+
+function handleSearchKeypress(event) {
+    if (event.key === 'Enter') {
+        handleSearch();
+    }
+}
+
+function handleFilters() {
+    showToast('Abrindo filtros...');
+}
+
+// Card click handler
+function handleCardClick(title) {
+    showToast(`Você clicou em: ${title}`);
+}
+
+// Toast notification
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toastMessage');
     
-    // Create new toast
-    const toast = document.createElement('div');
-    toast.className = `toast ${type}`;
-    toast.innerHTML = `<div class="toast-message">${message}</div>`;
+    // Remove existing toast if any
+    toast.classList.remove('hidden');
+    toastMessage.textContent = message;
     
-    document.body.appendChild(toast);
-    
-    // Remove toast after 3 seconds
+    // Auto hide after 3 seconds
     setTimeout(() => {
-        toast.style.animation = 'slideIn 0.3s ease-out reverse';
-        setTimeout(() => {
-            toast.remove();
-        }, 300);
+        toast.classList.add('hidden');
     }, 3000);
 }
-
-// Auto-play carousel (optional)
-// Uncomment the lines below to enable auto-play
-// setInterval(() => {
-//     nextSlide();
-// }, 5000);
