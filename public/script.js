@@ -180,3 +180,21 @@ function showToast(message) {
         toast.classList.add('hidden');
     }, 3000);
 }
+
+const novoUsuario = {name: "Antony", email: "antony@email.com", password: "1234"};
+
+fetch(`http://localhost:8080/usuarios`, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(novoUsuario)
+})
+.then(response => {
+    if (!response.ok) {    // checar se a resposta vai ser um erro HTTP
+        throw new Error(`Erro HTTP Status: ${response.status}`);
+    }
+    return response.json();
+})
+.then(data => console.log('Usuário criado:', data))
+.catch(error => console.error('Erro na requisição:', error));
